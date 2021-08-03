@@ -327,7 +327,58 @@ FROM employees;
 --직원의 이름,부서 ,팀을 출력
 --팀
 -- 부서코드 :10~30 ->A-Group
--- 부서코드 :10~30 ->A-Group
--- 부서코드 :10~30 ->A-Group
+-- 부서코드 :40~50 ->B-Group
+-- 부서코드 :60~100 ->C-Group
 --  나미저: REMAINDER
 
+
+SELECT first_name,department_id,
+    CASE WHEN department_id <=30 THEN 'A-Group'
+        WHEN department_id <=60 THEN 'B-Group'
+        WHEN department_id <=100 THEN 'C-Group'
+                         ELSE 'REMAINDER'
+            END Team
+FROM employees
+ORDER BY department_id;
+-- 1번
+SELECT first_name||' '||last_name 이름,salary 월급,phone_number 전화번호,hire_date 입사일
+FROM employees
+ORDER BY hire_date;
+-- 2번
+
+SELECT job_id, job_title,max_salary
+FROM jobs
+ORDER BY max_salary DESC;
+
+SELECT first_name,manager_id,commission_pct,salary
+FROM employees
+WHERE salary>=3000
+       AND manager_id IS NOT NULL
+       AND commission_pct IS NULL;
+
+SELECT job_title,max_salary
+FROM jobs
+WHERE max_salary>10000
+ORDER BY max_salary DESC;
+
+SELECT first_name,nvl(commission_pct,0),salary
+FROM employees
+WHERE salary>=10000 AND salary<=14000
+       AND commission_pct IS NULL
+ORDER BY salary DESC;
+
+SELECT first_name,
+    salary,
+    TO_CHAR(TO_DATE(hire_date,'YYYY-MM-DD'),'YYYY-MM-DD'),
+    department_id
+FROM employees
+WHERE department_id = 10 OR
+    department_id=90 OR
+    department_id=100;
+    
+SELECT first_name,salary
+FROM employees
+WHERE first_name LIKE '%S%'
+    OR first_name LIKE '%s%';
+    
+    
