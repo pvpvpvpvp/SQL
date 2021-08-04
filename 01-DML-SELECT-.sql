@@ -381,4 +381,3 @@ FROM employees
 WHERE first_name LIKE '%S%'
     OR first_name LIKE '%s%';
     
-    
