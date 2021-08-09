@@ -37,6 +37,7 @@ SELECT * FROM DBA_USERS WHERE username = 'C##BITUSER';
 GRANT create session TO C##BITUSER;
 GRANT create ROLE TO C##BITUSER;
 GRANT create TABLE TO C##BITUSER;
+GRANT create TO C##BITUSER;
 
 GRANT connect, resource TO C##BITUSER;
 
@@ -103,3 +104,15 @@ ADD (author_id NUMBER(10));
 -- 테이블의 book_id도 number(10) 으로..
 ALTER TABLE book
 MODIFY (book_id NUMBER(10));
+
+-- book.book_id에 pk 제약조건 부여
+ALTER TABLE book
+ADD CONSTRAINT pk_book_id PRIMARY KEY (book_id);
+
+-- book.author_id를 author.author_id를 참조하도록 제약
+ALTER TABLE book
+ADD CONSTRAINT fk_author_id PRIMARY KEY (author_id) 
+                REFERENCES author(author_id)
+                ON DELETE CASCADE;
+
+        
